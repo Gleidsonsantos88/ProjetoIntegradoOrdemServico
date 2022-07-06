@@ -27,8 +27,7 @@ namespace ProjetoIntegradoOrdemServico.Controllers
 
         [HttpGet]
 
-        // [Authorize(Policy = "SomenteFuncionario")]
-        [Authorize(Roles = "Gestor")]
+        //[Authorize(Roles = "Gestor")]
         public IEnumerable<WeatherForecast> Get()
         {
             var handler = new JwtSecurityTokenHandler();
@@ -55,8 +54,8 @@ namespace ProjetoIntegradoOrdemServico.Controllers
             .ToArray();
         }
 
-        [Authorize(Roles = "Tecnico")]
-        [HttpGet("sale/{id:int}")]
+        //[Authorize(Roles = "Tecnico")]
+        //[HttpGet("sale/{id:int}")]
         public IEnumerable<WeatherForecast> Get2(int id)
         {
             var handler = new JwtSecurityTokenHandler();

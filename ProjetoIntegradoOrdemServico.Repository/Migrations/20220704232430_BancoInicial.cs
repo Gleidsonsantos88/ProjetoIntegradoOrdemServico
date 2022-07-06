@@ -34,7 +34,8 @@ namespace ProjetoIntegradoOrdemServico.Repository.Migrations
                     ServicoId = table.Column<Guid>(nullable: false),
                     Valor = table.Column<decimal>(nullable: false),
                     DataCriacao = table.Column<DateTime>(nullable: false),
-                    OrdemServicoId = table.Column<Guid>(nullable: false)
+                    OrdemServicoId = table.Column<Guid>(nullable: false),
+                    DescricaoServico = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -71,14 +72,12 @@ namespace ProjetoIntegradoOrdemServico.Repository.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_ItemOrdemServicos_OrdemServicoId",
                 table: "ItemOrdemServicos",
-                column: "OrdemServicoId",
-                unique: true);
+                column: "OrdemServicoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrdemServicoSituacoes_OrdemServicoId",
                 table: "OrdemServicoSituacoes",
-                column: "OrdemServicoId",
-                unique: true);
+                column: "OrdemServicoId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

@@ -54,9 +54,15 @@ namespace ProjetoIntegradoOrdemServico
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
+
+            services.AddAutoMapper(typeof(Startup));
+
+            services.AddControllers().AddNewtonsoftJson(options =>
+                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
+
             services.ResolveDependencies();
-            services.AddControllers();
-       
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

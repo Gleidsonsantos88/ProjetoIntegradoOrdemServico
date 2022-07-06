@@ -10,7 +10,7 @@ using ProjetoIntegradoOrdemServico.Repository.Context;
 namespace ProjetoIntegradoOrdemServico.Repository.Migrations
 {
     [DbContext(typeof(ProjetoIntegradoDbContext))]
-    [Migration("20220629230155_BancoInicial")]
+    [Migration("20220704232430_BancoInicial")]
     partial class BancoInicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,6 +30,10 @@ namespace ProjetoIntegradoOrdemServico.Repository.Migrations
                     b.Property<DateTime>("DataCriacao")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("DescricaoServico")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid>("OrdemServicoId")
                         .HasColumnType("uniqueidentifier");
 
@@ -41,8 +45,7 @@ namespace ProjetoIntegradoOrdemServico.Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OrdemServicoId")
-                        .IsUnique();
+                    b.HasIndex("OrdemServicoId");
 
                     b.ToTable("ItemOrdemServicos");
                 });
@@ -104,8 +107,7 @@ namespace ProjetoIntegradoOrdemServico.Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OrdemServicoId")
-                        .IsUnique();
+                    b.HasIndex("OrdemServicoId");
 
                     b.ToTable("OrdemServicoSituacoes");
                 });
@@ -113,8 +115,8 @@ namespace ProjetoIntegradoOrdemServico.Repository.Migrations
             modelBuilder.Entity("ProjetoIntegradoOrdemServico.Service.Models.ItemOrdemServico", b =>
                 {
                     b.HasOne("ProjetoIntegradoOrdemServico.Service.Models.OrdemServico", "OrdemServico")
-                        .WithOne("ItemOrdemServicos")
-                        .HasForeignKey("ProjetoIntegradoOrdemServico.Service.Models.ItemOrdemServico", "OrdemServicoId")
+                        .WithMany("ItemOrdemServicos")
+                        .HasForeignKey("OrdemServicoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -122,8 +124,8 @@ namespace ProjetoIntegradoOrdemServico.Repository.Migrations
             modelBuilder.Entity("ProjetoIntegradoOrdemServico.Service.Models.OrdemServicoSituacao", b =>
                 {
                     b.HasOne("ProjetoIntegradoOrdemServico.Service.Models.OrdemServico", "OrdemServico")
-                        .WithOne("OrdemServicoSituacoes")
-                        .HasForeignKey("ProjetoIntegradoOrdemServico.Service.Models.OrdemServicoSituacao", "OrdemServicoId")
+                        .WithMany("OrdemServicoSituacoes")
+                        .HasForeignKey("OrdemServicoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

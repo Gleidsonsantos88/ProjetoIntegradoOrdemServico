@@ -9,7 +9,7 @@ namespace ProjetoIntegradoOrdemServico.Service.Models
         public Guid UsuarioCriacaoId { get; set; }
 
         public Guid OrdemServicoId { get; set; }
-        public OrdemServico OrdemServico { get; set; }
+        public virtual OrdemServico OrdemServico { get; set; }
         public OrdemServicoStatus OrdemServicoStatus { get; set; }
         public DateTime DataCriacao { get; set; }
     }
