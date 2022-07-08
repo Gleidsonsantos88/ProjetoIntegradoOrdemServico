@@ -71,5 +71,26 @@ namespace ProjetoIntegradoOrdemServico.Controllers
             return Ok(ordensServico);
         }
 
+        [HttpGet("listar-teste")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<OrdemServicoViewModel>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> ListarTeste()
+        {
+
+            try
+            {
+                var ordensServico = _mapper.Map<List<OrdemServicoViewModel>>(await _ordemServicoService.OrdemServico());
+
+                if (ordensServico == null)
+                    return NotFound();
+
+                return Ok(ordensServico);
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex.Message + ex.StackTrace);
+            }
+        }
+
     }
 }
