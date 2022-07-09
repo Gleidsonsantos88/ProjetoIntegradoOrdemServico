@@ -19,6 +19,44 @@ namespace ProjetoIntegradoOrdemServico.Repository.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("ProjetoIntegradoOrdemServico.Service.Models.Endereco", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Bairro")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Cep")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Cidade")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Complemento")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Logradouro")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Numero")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("OrdemServicoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("UF")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrdemServicoId")
+                        .IsUnique();
+
+                    b.ToTable("Endereco");
+                });
+
             modelBuilder.Entity("ProjetoIntegradoOrdemServico.Service.Models.ItemOrdemServico", b =>
                 {
                     b.Property<Guid>("Id")
@@ -62,6 +100,10 @@ namespace ProjetoIntegradoOrdemServico.Repository.Migrations
 
                     b.Property<DateTime?>("DataVigencia")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("NomeCliente")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NomeTecnico")
                         .IsRequired()
@@ -108,6 +150,15 @@ namespace ProjetoIntegradoOrdemServico.Repository.Migrations
                     b.HasIndex("OrdemServicoId");
 
                     b.ToTable("OrdemServicoSituacoes");
+                });
+
+            modelBuilder.Entity("ProjetoIntegradoOrdemServico.Service.Models.Endereco", b =>
+                {
+                    b.HasOne("ProjetoIntegradoOrdemServico.Service.Models.OrdemServico", "OrdemServico")
+                        .WithOne("Endereco")
+                        .HasForeignKey("ProjetoIntegradoOrdemServico.Service.Models.Endereco", "OrdemServicoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ProjetoIntegradoOrdemServico.Service.Models.ItemOrdemServico", b =>

@@ -21,6 +21,7 @@ namespace ProjetoIntegradoOrdemServico.Repository.Repository
             return await Task.Run(() => _context.OrdemServicos
                                         .Include("ItemOrdemServicos")
                                         .Include("OrdemServicoSituacoes")
+                                        .Include("Endereco")
                                         .Where(x => x.TecnicoId == tecnicoId).ToList());
         }
 
@@ -29,6 +30,7 @@ namespace ProjetoIntegradoOrdemServico.Repository.Repository
             return await Task.Run(() => _context.OrdemServicos
                                         .Include("ItemOrdemServicos")
                                         .Include("OrdemServicoSituacoes")
+                                        .Include("Endereco")
                                         .ToList());
         }
     }

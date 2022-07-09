@@ -9,6 +9,7 @@ namespace ProjetoIntegradoOrdemServico.Repository.Context
         public DbSet<OrdemServico> OrdemServicos { get; set; }
         public DbSet<ItemOrdemServico> ItemOrdemServicos { get; set; }
         public DbSet<OrdemServicoSituacao> OrdemServicoSituacoes { get; set; }
+        public DbSet<Endereco> Endereco { get; set; }
 
     }
 }

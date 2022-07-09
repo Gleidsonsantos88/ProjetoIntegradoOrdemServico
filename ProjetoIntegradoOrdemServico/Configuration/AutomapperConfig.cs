@@ -11,6 +11,7 @@ namespace ProjetoIntegradoOrdemServico.Configuration
             CreateMap<OrdemServico, OrdemServicoViewModel>().ReverseMap();
             CreateMap<ItemOrdemServico, ItemOrdemServicoViewModel>().ReverseMap();
             CreateMap<OrdemServicoSituacao, OrdemServicoSituacaoViewModel>().ReverseMap();
+            CreateMap<Endereco, EnderecoViewModel>().ReverseMap();
         }
     }
 }

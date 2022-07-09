@@ -18,6 +18,9 @@ namespace ProjetoIntegradoOrdemServico.Service.Models
         [Required(ErrorMessage = "Informe o nome técnico")]
         public string NomeTecnico { get; set; }
 
+        [Required(ErrorMessage = "Informe o nome do cliente")]
+        public string NomeCliente { get; set; }
+
         [MaxLength(500, ErrorMessage = "Observação não pode ter mais de 500 caracteres")]
         public String Observacao { get; set; }
 
@@ -25,6 +28,7 @@ namespace ProjetoIntegradoOrdemServico.Service.Models
         public DateTime? DataVigencia { get; set; }
         public Decimal ValorTotal { get; set; }
 
+        public Endereco Endereco { get; set; }
         public virtual List<ItemOrdemServico> ItemOrdemServicos { get; set; }
         public virtual List<OrdemServicoSituacao> OrdemServicoSituacoes { get; set; }
     }

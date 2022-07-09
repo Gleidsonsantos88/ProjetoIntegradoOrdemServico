@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProjetoIntegradoOrdemServico.Service.Interfaces;
 using ProjetoIntegradoOrdemServico.Service.Models;
-using ProjetoIntegradoOrdemServico.Service.Services;
 using ProjetoIntegradoOrdemServico.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -13,6 +13,7 @@ namespace ProjetoIntegradoOrdemServico.Controllers
 {
     [Route("api/ordemservico")]
     [ApiController]
+
     public class OrdermServicoController : ControllerBase
     {
         private readonly IOrdemServicoService _ordemServicoService;
@@ -27,6 +28,7 @@ namespace ProjetoIntegradoOrdemServico.Controllers
         [Route("criar")]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
+        [Authorize(Roles = "Gestor")]
         public async Task<IActionResult> Criar(OrdemServicoViewModel ordemServico)
         {
             try
@@ -43,9 +45,11 @@ namespace ProjetoIntegradoOrdemServico.Controllers
             }
         }
 
+
         [HttpGet("listar")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<OrdemServicoViewModel>))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize(Roles = "Gestor")]
         public async Task<IActionResult> Listar()
         {
 
@@ -60,6 +64,7 @@ namespace ProjetoIntegradoOrdemServico.Controllers
         [HttpGet("listar-portecnico/{tecnicoid:guid}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<OrdemServicoViewModel>))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize(Roles = "Tecnico")]
         public async Task<IActionResult> ListarPorTecnico(Guid tecnicoId)
         {
 
